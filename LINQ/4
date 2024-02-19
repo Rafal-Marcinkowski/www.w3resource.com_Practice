@@ -1,0 +1,15 @@
+//4.Write a program in C# Sharp to display the number and frequency of a given number from an array.
+//Expected Output :
+//The number and the Frequency are :
+//Number 5 appears 3 times
+//Number 9 appears 2 times
+//Number 1 appears 1 times
+
+int[] initialArray = [-3, 5, 9, -17, -14, 14, 9, -3, 5, 5, -17, 15, 15, 14, 5, 1, 1];
+
+int[] distinctNumbersFromArray = initialArray.Distinct().ToArray();
+
+foreach (int number in distinctNumbersFromArray)
+{
+    Console.WriteLine($"Number {number} appears {initialArray.Count(q => q == number)} times");
+}
