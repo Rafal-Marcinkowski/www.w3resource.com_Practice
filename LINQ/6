@@ -1,0 +1,27 @@
+//6.Write a program in C# Sharp to display the name of the days of the week.
+//Expected Output:
+//Sunday
+//Monday
+//Tuesday
+//Wednesday
+//Thursday
+//Friday
+//Saturday
+
+string[] daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+var days = daysOfWeek.GroupBy(q => q);
+
+foreach (var day in days)
+{
+    Console.WriteLine(day.Key);
+}
+
+var daysQuerySyntax = from day in daysOfWeek
+                      group day by day into x
+                      select x;
+
+foreach (var day in daysQuerySyntax)
+{
+    Console.WriteLine(day.Key);
+}
