@@ -1,0 +1,31 @@
+//8.Write a program in C# Sharp to find a string that starts and ends with a specific character.
+//Test Data :
+//The cities are : "ROME","LONDON","NAIROBI","CALIFORNIA","ZURICH","NEW DELHI","AMSTERDAM","ABU DHABI","PARIS"
+//Input starting character for the string : A
+//Input ending character for the string : M
+//Expected Output :
+//The city starting with A and ending with M is : AMSTERDAM
+
+string[] testData = ["ROME", "LONDON", "NAIROBI", "CALIFORNIA", "ZURICH", "NEW DELHI", "AMSTERDAM", "ABU DHABI", "PARIS"];
+
+Console.Write("Input starting character for the string : ");
+ConsoleKeyInfo startingChar = Console.ReadKey(); Console.WriteLine();
+Console.Write("Input ending character for the string : ");
+ConsoleKeyInfo endingChar = Console.ReadKey(); Console.WriteLine();
+
+var result = testData.Where(x => x.StartsWith(startingChar.KeyChar) && x.EndsWith(endingChar.KeyChar));
+foreach (string s in result)
+{
+    Console.WriteLine($"The City starting with {startingChar.KeyChar} and ending with {endingChar.KeyChar} is: {s}");
+}
+
+var resultQuerySyntax = from city in testData
+                        let StartChar = city[0]
+                        let EndChar = city.Last()
+                        where StartChar == startingChar.KeyChar
+                        && EndChar == endingChar.KeyChar
+                        select city;
+foreach (string s in resultQuerySyntax)
+{
+    Console.WriteLine($"The City starting with {startingChar.KeyChar} and ending with {endingChar.KeyChar} is: {s}");
+}
