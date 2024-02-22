@@ -1,0 +1,27 @@
+//12.Write a program in C# Sharp to find uppercase words in a string.
+//Test Data :
+//Input the string : this IS a STRING
+//Expected Output :
+//The UPPER CASE words are :
+//IS
+//STRING
+
+Console.Write("Input the string : ");
+string testString = Console.ReadLine();
+
+string[] wordsArray = testString.Split(' ');
+var filteredList = wordsArray.Where(q => q.All(x => char.IsUpper(x)));
+
+Console.WriteLine("The UPPER CASE words are : ");
+foreach (var word in filteredList)
+{
+    Console.WriteLine(word);
+}
+
+filteredList = from word in wordsArray
+               where word.All(x => char.IsUpper(x))
+               select word;
+foreach (var word in filteredList)
+{
+    Console.WriteLine(word);
+}
