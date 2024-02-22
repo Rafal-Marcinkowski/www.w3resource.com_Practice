@@ -20,17 +20,17 @@ int[] testData = [5, 7, 13, 24, 6, 9, 8, 7];
 Console.Write("How many records you want to display? : ");
 int numbersToDisplay = Convert.ToInt32(Console.ReadLine());
 
-int[] filteredList = testData.OrderByDescending(x => x).ToArray();
+int[] filteredArray = testData.OrderByDescending(x => x).ToArray();
 Console.WriteLine("The top 3 records from the list are :");
 for (int i = 0; i < numbersToDisplay; i++)
 {
-    Console.WriteLine(filteredList[i]);
+    Console.WriteLine(filteredArray[i]);
 }
 
-filteredList = (from num in testData
+filteredArray = (from num in testData
                 orderby num descending
                 select num).ToArray();
 for (int i = 0; i < numbersToDisplay; i++)
 {
-    Console.WriteLine(filteredList[i]);
+    Console.WriteLine(filteredArray[i]);
 }
