@@ -1,0 +1,36 @@
+//11.Write a program in C# Sharp to display the top n-th records.
+//Test Data :
+//The members of the list are :
+//5
+//7
+//13
+//24
+//6
+//9
+//8
+//7
+//How many records you want to display ? : 3
+//Expected Output :
+//The top 3 records from the list are :
+//24
+//13
+//9
+
+int[] testData = [5, 7, 13, 24, 6, 9, 8, 7];
+Console.Write("How many records you want to display? : ");
+int numbersToDisplay = Convert.ToInt32(Console.ReadLine());
+
+int[] filteredList = testData.OrderByDescending(x => x).ToArray();
+Console.WriteLine("The top 3 records from the list are :");
+for (int i = 0; i < numbersToDisplay; i++)
+{
+    Console.WriteLine(filteredList[i]);
+}
+
+filteredList = (from num in testData
+                orderby num descending
+                select num).ToArray();
+for (int i = 0; i < numbersToDisplay; i++)
+{
+    Console.WriteLine(filteredList[i]);
+}
