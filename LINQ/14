@@ -1,0 +1,54 @@
+//14.Write a program in C# Sharp to find the n-th maximum grade point achieved by the students from the list of students.
+//Test Data :
+//Which maximum grade point(1st, 2nd, 3rd, ...) you want to find : 3
+//Expected Output:
+//Id: 7, Name: David, achieved Grade Point : 750
+//Id: 10, Name: Jenny, achieved Grade Point : 750
+
+
+Console.Write("How many students do you wish to create? : ");
+int numberOfStudents = Convert.ToInt32(Console.ReadLine());
+
+List<Student> students = new();
+for (int i = 0; i < numberOfStudents; i++)
+{
+    Student student = new();
+    Console.Write("Enter student name: ");
+    student.Name = Console.ReadLine();
+    Console.Write("Enter student grade: ");
+    student.GradePoints = Convert.ToInt32(Console.ReadLine());
+    students.Add(student);
+}
+
+Console.Write("Which maximum grade point(1st, 2nd, 3rd, ...) you want to find : ");
+int gradeToFind = Convert.ToInt32(Console.ReadLine());
+var filteredArray = students.OrderByDescending(q => q.GradePoints)
+                            .GroupBy(q => q.GradePoints)
+                            .ToArray()[gradeToFind - 1];
+
+foreach (var student in filteredArray)
+{
+    Console.WriteLine($"Id: {student.Id}, Name: {student.Name}, achieved Grade Point : {student.GradePoints}");
+}
+
+var filteredArrayQuerySyntax = (from student in students
+                                group student by student.GradePoints into gradeGroup
+                                orderby gradeGroup.Key descending
+                                select gradeGroup).ToArray();
+foreach (var student in filteredArrayQuerySyntax[gradeToFind - 1])
+{
+    Console.WriteLine($"Id: {student.Id}, Name: {student.Name}, achieved Grade Point : {student.GradePoints}");
+}
+
+public class Student
+{
+    public int Id { get; set; }
+    private static int studentCounter = 1;
+    public string Name { get; set; }
+    public int GradePoints { get; set; }
+    public Student()
+    {
+        Id = studentCounter;
+        studentCounter++;
+    }
+}
