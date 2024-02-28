@@ -1,0 +1,42 @@
+//17.Write a program in C# Sharp to remove items from list using remove function by passing the object.
+//Test Data :
+//Here is the list of items :
+//Char: m
+//Char: n
+//Char: o
+//Char: p
+//Char: q
+//Expected Output:
+//Here is the list after removing the item 'o' from the list :
+//Char: m
+//Char: n
+//Char: p
+//Char: q
+
+List<char> chars = ['m', 'n', 'o', 'p', 'r', 's', 't', 'q'];
+
+Console.WriteLine("Here is the list of items: ");
+ConsoleWriteLine(chars);
+Console.WriteLine("What char do you want to remove from list?: ");
+char charToRemove = (char)Console.Read();
+chars.Remove(charToRemove);
+
+Console.WriteLine($"Here is the list after removing the item '{charToRemove}' from the list :");
+ConsoleWriteLine(chars);
+
+//query syntax
+
+chars = ['m', 'n', 'o', 'p', 'r', 's', 't', 'q'];
+Console.WriteLine($"Here is the list after removing the item '{charToRemove}' from the list :");
+var charsQuerySyntax = from c in chars
+                       where c != charToRemove
+                       select c;
+ConsoleWriteLine(charsQuerySyntax);
+
+void ConsoleWriteLine<T>(IEnumerable<T> elements)
+{
+    foreach (T element in elements)
+    {
+        Console.WriteLine($"Char: {element}");
+    }
+}
