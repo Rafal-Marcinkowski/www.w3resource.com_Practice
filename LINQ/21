@@ -1,0 +1,40 @@
+//21.Write a program in C# Sharp to remove a range of items from a list by passing the start index and number of elements to remove.
+//Test Data :
+//Here is the list of items :
+//Char: m
+//Char: n
+//Char: o
+//Char: p
+//Char: q
+//Expected Output:
+//Here is the list after removing the three items starting from the item index 1 from the list :
+//Char: m
+//Char: q
+
+List<char> chars = ['m', 'n', 'o', 'p', 'r', 's', 't', 'q'];
+
+Console.WriteLine("Here is the list of items: ");
+ConsoleWriteLine(chars);
+Console.Write("How many items to remove? : ");
+int numberOfItemsToRemove = Convert.ToInt32(Console.ReadLine());
+Console.Write("What index to start from? : ");
+int startIndex = Convert.ToInt32(Console.ReadLine());
+
+Console.WriteLine($"Here is the list after removing {numberOfItemsToRemove} items starting from the item index {startIndex} from the list: ");
+chars.RemoveRange(startIndex, numberOfItemsToRemove);
+ConsoleWriteLine(chars);
+
+chars = ['m', 'n', 'o', 'p', 'r', 's', 't', 'q'];
+chars = (from c in chars
+         where !(chars.IndexOf(c) >= startIndex && chars.IndexOf(c) < startIndex + numberOfItemsToRemove)
+         select c).ToList();
+
+Console.WriteLine($"Here is the list after removing {numberOfItemsToRemove} items starting from the item index {startIndex} from the list: ");
+ConsoleWriteLine(chars);
+void ConsoleWriteLine<T>(IEnumerable<T> elements)
+{
+    foreach (T element in elements)
+    {
+        Console.WriteLine($"Char: {element}");
+    }
+}
