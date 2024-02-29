@@ -1,0 +1,40 @@
+//20.Write a program in C# Sharp to remove items from list by passing the item index.
+//Test Data :
+//Here is the list of items :
+//Char: m
+//Char: n
+//Char: o
+//Char: p
+//Char: q
+//Expected Output:
+//Here is the list after removing item index 3 from the list :
+//Char: m
+//Char: n
+//Char: o
+//Char: q
+
+List<char> chars = ['m', 'n', 'o', 'p', 'r', 's', 't', 'q'];
+
+Console.WriteLine("Here is the list of items: ");
+ConsoleWriteLine(chars);
+Console.WriteLine("What char do you want to remove from list?: ");
+int index = Console.Read() - '0';
+chars.RemoveAt(index);
+
+Console.WriteLine($"Here is the list after removing item index {index} from the list :");
+ConsoleWriteLine(chars);
+
+chars = ['m', 'n', 'o', 'p', 'r', 's', 't', 'q'];
+chars = (from c in chars
+         where chars.IndexOf(c) != index
+         select c).ToList();
+Console.WriteLine($"Here is the list after removing item index {index} from the list :");
+ConsoleWriteLine(chars);
+
+void ConsoleWriteLine<T>(IEnumerable<T> elements)
+{
+    foreach (T element in elements)
+    {
+        Console.WriteLine($"Char: {element}");
+    }
+}
