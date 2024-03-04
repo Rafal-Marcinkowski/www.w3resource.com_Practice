@@ -1,0 +1,28 @@
+//23.Write a program in C# Sharp to generate a cartesian product of two sets.
+//Expected Output :
+//The cartesian product are :
+//{ letterList = X, numberList = 1 }
+//{ letterList = X, numberList = 2 }
+//{ letterList = X, numberList = 3 }
+//{ letterList = X, numberList = 4 }
+
+List<char> lettersList = new();
+List<int> numbersList = new() { 1, 2, 3, 4 };
+lettersList.Add('X');
+//lettersList.Add('Y');
+
+var combinedList = lettersList.SelectMany(letter => numbersList.Select(q => new { Letter = letter, Number = q }));
+
+foreach (var item in combinedList)
+{
+    Console.WriteLine($"{{ letterList = {item.Letter}, numberList = {item.Number} }}");
+}
+
+Console.WriteLine();
+var combinedListQuerySyntax = from letter in lettersList
+                              from number in numbersList
+                              select new { Letter = letter, Number = number };
+foreach (var item in combinedListQuerySyntax)
+{
+    Console.WriteLine($"{{ letterList = {item.Letter}, numberList = {item.Number} }}");
+}
