@@ -1,0 +1,83 @@
+//25.Write a program in C# Sharp to generate an Inner Join between two data sets.
+//Expected Output :
+
+//Item ID         Item Name       Purchase Quantity                                                             
+//-------------------------------------------------------                                                       
+//1               Biscuit                 458                                                                   
+//2               Chocolate               650                                                                   
+//3               Butter                  800                                                                   
+//3               Butter                  900                                                                   
+//3               Butter                  900                                                                   
+//4               Brade                   700                                                                   
+//4               Brade                   650
+
+List<Item> items = new List<Item>
+{
+    new Item(1, "Biscuit"),
+    new Item(2, "Chocolate"),
+    new Item(3, "Butter"),
+    new Item(4, "Bread")
+};
+List<Purchase> purchases = new List<Purchase>
+{
+    new Purchase(1, 458),
+    new Purchase(2, 650),
+    new Purchase(3, 800),
+    new Purchase(3, 900),
+    new Purchase(3, 900),
+    new Purchase(4, 700),
+    new Purchase(4, 650),
+};
+
+var joined2DataSets = items.Join(purchases, i => i.Id, p => p.ItemId, (i, p) => new
+{
+    ItemId = i.Id,
+    ItemName = i.ItemName,
+    PurchaseQuantity = p.ItemQuantity
+});
+
+Console.WriteLine("Item ID         Item Name       Purchase Quantity");
+Console.WriteLine("-------------------------------------------------------");
+foreach (var item in joined2DataSets)
+{
+    Console.WriteLine($"{item.ItemId,-6}          {item.ItemName,-11}              {item.PurchaseQuantity}");
+}
+
+Console.WriteLine();
+
+var dataSetsQuerySyntax = from i in items
+                          join p in purchases
+                          on i.Id equals p.ItemId
+                          select new
+                          {
+                              ItemId = i.Id,
+                              ItemName = i.ItemName,
+                              PurchaseQuantity = p.ItemQuantity
+                          };
+Console.WriteLine("Item ID         Item Name       Purchase Quantity");
+Console.WriteLine("-------------------------------------------------------");
+foreach (var item in dataSetsQuerySyntax)
+{
+    Console.WriteLine($"{item.ItemId,-6}          {item.ItemName,-11}              {item.PurchaseQuantity}");
+}
+
+class Item
+{
+    public Item(int id, string itemName)
+    {
+        Id = id;
+        ItemName = itemName;
+    }
+    public int Id { get; set; }
+    public string ItemName { get; set; }
+}
+class Purchase
+{
+    public Purchase(int id, int itemQuantity)
+    {
+        ItemId = id;
+        ItemQuantity = itemQuantity;
+    }
+    public int ItemId { get; set; }
+    public int ItemQuantity { get; set; }
+}
