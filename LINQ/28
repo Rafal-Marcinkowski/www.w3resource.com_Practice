@@ -17,3 +17,15 @@ foreach (var item in cities.OrderBy(q => q.Length).ThenBy(q => q))
 {
     Console.WriteLine(item);
 }
+
+Console.WriteLine();
+
+Console.WriteLine("Here is the arranged list: ");
+
+var orderedArray = from c in cities
+                   orderby c.Length ascending, c
+                   select c;
+foreach (var item in orderedArray)
+{
+    Console.WriteLine(item);
+}
