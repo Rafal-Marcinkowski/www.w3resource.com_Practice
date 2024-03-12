@@ -1,0 +1,40 @@
+//29.Write a program in C# Sharp to split a collection of strings into some groups.
+//Expected Output :
+//Here is the group of cities :
+
+//ROME; LONDON; NAIROBI
+//-- here is a group of cities --
+
+//CALIFORNIA; ZURICH; NEW DELHI
+//-- here is a group of cities --
+
+//AMSTERDAM; ABU DHABI; PARIS
+//-- here is a group of cities --
+
+//NEW YORK
+//-- here is a group of cities --
+
+string[] cities = ["ROME", "LONDON", "NAIROBI", "CALIFORNIA", "ZURICH", "NEW DELHI", "AMSTERDAM", "ABU DHABI", "PARIS", "NEW YORK"];
+
+var groups = cities.Select((city, index) =>
+                    new { City = city, Group = index / 3 })
+                    .GroupBy(q => q.Group, x => x.City);
+
+foreach (var group in groups)
+{
+    Console.WriteLine("Here is the group of cities :");
+    Console.WriteLine();
+    Console.WriteLine(string.Join("; ", group));
+}
+
+Console.WriteLine("Query syntax: ");
+
+var groupsQuerySyntax = from index in Enumerable.Range(0, cities.Length)
+                        let city = cities[index]
+                        group city by index / 3;
+foreach (var group in groupsQuerySyntax)
+{
+    Console.WriteLine("Here is the group of cities :");
+    Console.WriteLine();
+    Console.WriteLine(string.Join("; ", group));
+}
