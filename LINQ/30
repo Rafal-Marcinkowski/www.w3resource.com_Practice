@@ -1,0 +1,48 @@
+//30.Write a program in C# Sharp to arrange the distinct elements in the list in ascending order.
+//Expected Output :
+//Biscuit
+//Brade
+//Butter
+//Honey
+
+List<Item> items = new List<Item>
+{
+    new Item(1, "Biscuit"),
+    new Item(2, "Biscuit"),
+    new Item(3, "Chocolate"),
+    new Item(4, "Chocolate"),
+    new Item(5, "Butter"),
+    new Item(6, "Bread"),
+    new Item(7, "Honey"),
+    new Item(8, "Honey"),
+    new Item(9, "Honey"),
+    new Item(10, "Biscuit")
+};
+
+var results = items.DistinctBy(q => q.ItemName).OrderBy(x => x.ItemName);
+foreach (var item in results)
+{
+    Console.WriteLine(item.ItemName);
+}
+
+Console.WriteLine();
+
+var querySyntax = from item in items
+                  group item by item.ItemName into itemGroup
+                  orderby itemGroup.Key
+                  select itemGroup.First();
+foreach (var item in querySyntax)
+{
+    Console.WriteLine(item.ItemName);
+}
+
+class Item
+{
+    public Item(int id, string itemName)
+    {
+        Id = id;
+        ItemName = itemName;
+    }
+    public int Id { get; set; }
+    public string ItemName { get; set; }
+}
